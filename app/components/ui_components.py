@@ -26,21 +26,28 @@ def inject_custom_css():
             background-color: #F8FAFC !important;
         }
 
-        /* ── Shift Main View Canvas 320px to the Right ── */
-        [data-testid="stAppViewContainer"] > .main,
-        [data-testid="stMain"],
-        section.main,
-        .stMainBlockContainer {
-            margin-left: 320px !important;
-            width: calc(100vw - 320px) !important;
-            max-width: calc(100vw - 320px) !important;
+        /* ── Shift Main View Canvas 320px to the Right (Fix Double Margin) ── */
+        [data-testid="stAppViewContainer"] {
+            overflow-x: hidden !important;
         }
 
-        .main .block-container {
-            max-width: 1540px !important;
-            padding: 1.8rem 2.2rem 3rem 2.2rem !important;
+        [data-testid="stAppViewContainer"] > .main,
+        [data-testid="stMain"],
+        section.main {
+            margin-left: 320px !important;
+            width: calc(100% - 320px) !important;
+            max-width: calc(100% - 320px) !important;
+            box-sizing: border-box !important;
+        }
+
+        .main .block-container,
+        [data-testid="stMainBlockContainer"] {
+            max-width: 100% !important;
+            width: 100% !important;
+            padding: 1.8rem 2rem 3rem 2rem !important;
             margin-left: 0 !important;
-            margin-right: auto !important;
+            margin-right: 0 !important;
+            box-sizing: border-box !important;
         }
 
         /* ── SIDEBAR OVERHAUL (Width: 320px, Height: 100vh Fixed) ── */
