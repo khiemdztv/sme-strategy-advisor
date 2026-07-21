@@ -61,9 +61,9 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
             50% { transform: translateY(-4px); }
         }
 
-        /* Floating Chatbot Button Position & Prevent Full-Width Container */
-        div[data-testid="stElementContainer"]:has(div[data-testid="stPopover"]),
-        div[data-testid="stPopover"],
+        /* Floating Chatbot Button Container */
+        [data-testid="stPopover"],
+        [data-testid="stPopoverButton"],
         .stPopover {
             position: fixed !important;
             bottom: 75px !important;
@@ -79,30 +79,40 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
             margin: 0 !important;
         }
 
-        /* Executive High-Visibility Gradient Button */
-        div[data-testid="stPopover"] > button {
+        /* Executive High-Visibility Gradient Button (Descendant Selectors) */
+        [data-testid="stPopover"] button,
+        [data-testid="stPopoverButton"] button,
+        button[aria-haspopup="dialog"] {
             background: linear-gradient(135deg, #1E40AF 0%, #2563EB 60%, #3B82F6 100%) !important;
             color: #FFFFFF !important;
             border-radius: 50px !important;
-            padding: 0.95rem 1.7rem !important;
+            padding: 0.85rem 1.6rem !important;
             border: 2px solid rgba(255, 255, 255, 0.6) !important;
             font-weight: 800 !important;
-            font-size: 1.02rem !important;
+            font-size: 0.98rem !important;
             letter-spacing: -0.01em !important;
             box-shadow: 0 10px 30px rgba(37, 99, 235, 0.45) !important;
             animation: pulseGlow 2.8s infinite !important;
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
             width: auto !important;
+            max-width: fit-content !important;
+            display: inline-flex !important;
+            align-items: center !important;
         }
-        div[data-testid="stPopover"] > button:hover {
+        [data-testid="stPopover"] button:hover,
+        [data-testid="stPopoverButton"] button:hover,
+        button[aria-haspopup="dialog"]:hover {
             background: linear-gradient(135deg, #1E3A8A 0%, #1D4ED8 100%) !important;
             transform: translateY(-3px) scale(1.03) !important;
             box-shadow: 0 14px 35px rgba(37, 99, 235, 0.6) !important;
         }
-        div[data-testid="stPopover"] > button p {
+        [data-testid="stPopover"] button p,
+        [data-testid="stPopoverButton"] button p,
+        button[aria-haspopup="dialog"] p,
+        button[aria-haspopup="dialog"] span {
             color: #FFFFFF !important;
             font-weight: 800 !important;
-            font-size: 1.02rem !important;
+            font-size: 0.98rem !important;
             margin: 0 !important;
         }
 
