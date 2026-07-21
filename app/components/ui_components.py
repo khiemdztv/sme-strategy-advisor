@@ -26,18 +26,21 @@ def inject_custom_css():
             background-color: #F8FAFC !important;
         }
 
-        /* ── Shift Main View Canvas 320px to the Right (Fix Double Margin) ── */
+        /* ── Main View Canvas Layout ── */
         [data-testid="stAppViewContainer"] {
             overflow-x: hidden !important;
+        }
+
+        [data-testid="stHeader"] {
+            background-color: transparent !important;
+            z-index: 100 !important;
         }
 
         [data-testid="stAppViewContainer"] > .main,
         [data-testid="stMain"],
         section.main {
-            margin-left: 320px !important;
-            width: calc(100% - 320px) !important;
-            max-width: calc(100% - 320px) !important;
-            box-sizing: border-box !important;
+            padding: 0 !important;
+            margin: 0 !important;
         }
 
         .main .block-container,
@@ -45,12 +48,10 @@ def inject_custom_css():
             max-width: 100% !important;
             width: 100% !important;
             padding: 1.8rem 2rem 3rem 2rem !important;
-            margin-left: 0 !important;
-            margin-right: 0 !important;
             box-sizing: border-box !important;
         }
 
-        /* ── SIDEBAR OVERHAUL (Width: 320px, Height: 100vh Fixed) ── */
+        /* ── SIDEBAR OVERHAUL (Width: 320px) ── */
         [data-testid="stSidebar"] {
             width: 320px !important;
             min-width: 320px !important;
@@ -58,11 +59,6 @@ def inject_custom_css():
             background-color: #FFFFFF !important;
             border-right: 1px solid #E5E7EB !important;
             padding: 0 !important;
-            height: 100vh !important;
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            z-index: 9999 !important;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
         }
 
