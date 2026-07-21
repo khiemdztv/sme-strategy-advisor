@@ -61,110 +61,27 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
             50% { transform: translateY(-4px); }
         }
 
-        /* Floating Chatbot Element Container (Target Last Child of Main Canvas) */
-        html body div.stApp [data-testid="stMainBlockContainer"] > div[data-testid="stElementContainer"]:last-child,
-        html body div.stApp .main .block-container > div.element-container:last-child,
-        html body div.stApp [data-testid="stPopover"],
-        html body div.stApp [data-testid="stPopoverButton"],
-        html body div.stApp div.stPopover {
-            position: fixed !important;
-            bottom: 75px !important;
-            right: 25px !important;
-            width: auto !important;
-            max-width: fit-content !important;
-            min-width: unset !important;
-            z-index: 999999 !important;
-            background: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-            padding: 0 !important;
-            margin: 0 !important;
-        }
-
-        /* Executive High-Visibility Gradient Button (Target exact button child) */
-        html body div.stApp [data-testid="stMainBlockContainer"] > div[data-testid="stElementContainer"]:last-child button,
-        html body div.stApp .main .block-container > div.element-container:last-child button,
-        html body div.stApp [data-testid="stPopover"] button,
-        html body div.stApp [data-testid="stPopoverButton"] button,
-        html body div.stApp button[data-testid="stBaseButton-popover"],
-        html body div.stApp button[aria-haspopup="dialog"] {
-            background: linear-gradient(135deg, #1E40AF 0%, #2563EB 60%, #3B82F6 100%) !important;
-            background-color: #2563EB !important;
+        /* Sidebar Chatbot Popover Styling */
+        [data-testid="stSidebar"] [data-testid="stPopover"] button,
+        [data-testid="stSidebar"] button[aria-haspopup="dialog"] {
+            background: linear-gradient(135deg, #1E40AF 0%, #2563EB 100%) !important;
             color: #FFFFFF !important;
-            border-radius: 50px !important;
-            padding: 0.85rem 1.6rem !important;
-            border: 2px solid rgba(255, 255, 255, 0.7) !important;
+            border-radius: 12px !important;
+            padding: 0.75rem 1rem !important;
+            border: 1px solid rgba(255, 255, 255, 0.4) !important;
             font-weight: 800 !important;
-            font-size: 0.98rem !important;
-            letter-spacing: -0.01em !important;
-            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.45) !important;
-            animation: pulseGlow 2.8s infinite !important;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-            width: auto !important;
-            max-width: fit-content !important;
-            display: inline-flex !important;
-            align-items: center !important;
+            font-size: 0.95rem !important;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3) !important;
+            margin-top: 10px !important;
         }
-        html body div.stApp [data-testid="stMainBlockContainer"] > div[data-testid="stElementContainer"]:last-child button:hover,
-        html body div.stApp [data-testid="stPopover"] button:hover,
-        html body div.stApp button[data-testid="stBaseButton-popover"]:hover,
-        html body div.stApp button[aria-haspopup="dialog"]:hover {
+        [data-testid="stSidebar"] [data-testid="stPopover"] button:hover,
+        [data-testid="stSidebar"] button[aria-haspopup="dialog"]:hover {
             background: linear-gradient(135deg, #1E3A8A 0%, #1D4ED8 100%) !important;
-            background-color: #1D4ED8 !important;
-            transform: translateY(-3px) scale(1.03) !important;
-            box-shadow: 0 14px 35px rgba(37, 99, 235, 0.6) !important;
+            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.45) !important;
         }
-        html body div.stApp [data-testid="stMainBlockContainer"] > div[data-testid="stElementContainer"]:last-child button *,
-        html body div.stApp [data-testid="stPopover"] button *,
-        html body div.stApp button[data-testid="stBaseButton-popover"] *,
-        html body div.stApp button[aria-haspopup="dialog"] * {
+        [data-testid="stSidebar"] [data-testid="stPopover"] button * {
             color: #FFFFFF !important;
-            fill: #FFFFFF !important;
             font-weight: 800 !important;
-            font-size: 0.98rem !important;
-            margin: 0 !important;
-        }
-
-        /* Callout Badge (Bong Bóng Hướng Dẫn) */
-        .chat-callout-badge {
-            position: fixed !important;
-            bottom: 145px !important;
-            right: 25px !important;
-            width: auto !important;
-            max-width: 320px !important;
-            background: #FFFFFF !important;
-            color: #0F172A !important;
-            padding: 0.6rem 1.1rem !important;
-            border-radius: 14px !important;
-            font-size: 0.83rem !important;
-            font-weight: 700 !important;
-            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.15) !important;
-            border: 1.5px solid #2563EB !important;
-            z-index: 999998 !important;
-            pointer-events: none !important;
-            animation: floatBounce 3s infinite ease-in-out !important;
-            display: flex !important;
-            align-items: center !important;
-            gap: 8px !important;
-        }
-        .chat-callout-badge::after {
-            content: '';
-            position: absolute;
-            bottom: -9px;
-            right: 35px;
-            width: 0;
-            height: 0;
-            border-left: 9px solid transparent;
-            border-right: 9px solid transparent;
-            border-top: 9px solid #2563EB;
-        }
-        .chat-callout-dot {
-            width: 9px;
-            height: 9px;
-            background-color: #22C55E;
-            border-radius: 50%;
-            display: inline-block;
-            box-shadow: 0 0 8px #22C55E;
         }
 
         /* Pop-up Window Dimensions & Style */
@@ -205,11 +122,6 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
         .chat-header-v2 .subtitle { font-size: 0.78rem; color: #93C5FD; font-weight: 500; margin-top: 2px; }
         .chat-header-v2 .status { font-size: 0.73rem; color: #4ADE80; font-weight: 600; margin-top: 3px; display: flex; align-items: center; gap: 6px; }
     </style>
-    
-    <div class="chat-callout-badge">
-        <span class="chat-callout-dot"></span>
-        <span>💡 Thắc mắc về trang này? <strong>Hỏi AI Advisor</strong> ngay!</span>
-    </div>
     """, unsafe_allow_html=True)
 
     history_key = f"chat_history_{page_type}"
@@ -224,7 +136,7 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
             }
         ]
 
-    with st.popover("💬 Hỏi AI Trợ Lý Về Trang Này"):
+    with st.sidebar.popover("🤖 Hỏi AI Trợ Lý Về Trang Này", use_container_width=True):
         st.markdown(f"""
         <div class="chat-header-v2">
             <div class="icon-box"><i class="fa-solid fa-headset"></i></div>
