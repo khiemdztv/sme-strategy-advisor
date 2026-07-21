@@ -1,0 +1,36 @@
+WORKBank Dataset Preparation Summary
+=====================================
+
+Total merged tasks: 2131
+
+Tasks & Occupations count by Industry Group:
+- Kinh doanh, tài chính và quản trị tổ chức:
+  Tasks: 619
+  Occupations: 72
+  File path: data/group1_business_finance.csv
+
+- Công nghệ thông tin, AI và phân tích dữ liệu:
+  Tasks: 716
+  Occupations: 102
+  File path: data/group2_it_ai_data.csv
+
+- Marketing, truyền thông và công nghiệp nội dung:
+  Tasks: 279
+  Occupations: 31
+  File path: data/group3_marketing_media.csv
+
+- Pháp lý, hành chính và tuân thủ:
+  Tasks: 159
+  Occupations: 21
+  File path: data/group4_legal_compliance.csv
+
+- Y tế, dược và khoa học sự sống:
+  Tasks: 139
+  Occupations: 26
+  File path: data/group5_health_life_sciences.csv
+
+- Khác:
+  Tasks: 219
+  Occupations: 35
+  File path: data/group_other.csv
+
