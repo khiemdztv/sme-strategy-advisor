@@ -254,11 +254,12 @@ def inject_custom_css():
             color: #64748B;
         }
         .kpi-value {
-            font-size: 1.9rem;
-            font-weight: 800;
-            color: #0F172A;
-            line-height: 1;
-            letter-spacing: -0.03em;
+            font-size: 1.5rem !important;
+            font-weight: 800 !important;
+            color: #0F172A !important;
+            line-height: 1.1 !important;
+            letter-spacing: -0.02em !important;
+            white-space: nowrap !important;
         }
         .kpi-sub {
             font-size: 0.78rem;

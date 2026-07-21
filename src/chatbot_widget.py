@@ -61,10 +61,10 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
             50% { transform: translateY(-4px); }
         }
 
-        /* Floating Chatbot Button Position */
+        /* Floating Chatbot Button Position (Lifted above Streamlit Cloud toolbar) */
         div[data-testid="stPopover"] {
             position: fixed !important;
-            bottom: 25px !important;
+            bottom: 75px !important;
             right: 25px !important;
             z-index: 999999 !important;
         }
@@ -98,7 +98,7 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
         /* Callout Badge (Bong Bóng Hướng Dẫn) */
         .chat-callout-badge {
             position: fixed;
-            bottom: 92px;
+            bottom: 140px;
             right: 25px;
             background: #FFFFFF;
             color: #0F172A;
