@@ -61,11 +61,12 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
             50% { transform: translateY(-4px); }
         }
 
-        /* Floating Chatbot Button Container (High Specificity Override) */
+        /* Floating Chatbot Element Container (Target Last Child of Main Canvas) */
+        html body div.stApp [data-testid="stMainBlockContainer"] > div[data-testid="stElementContainer"]:last-child,
+        html body div.stApp .main .block-container > div.element-container:last-child,
         html body div.stApp [data-testid="stPopover"],
         html body div.stApp [data-testid="stPopoverButton"],
-        html body div.stApp div.stPopover,
-        html body div.stApp [data-testid="stElementContainer"] [data-testid="stPopover"] {
+        html body div.stApp div.stPopover {
             position: fixed !important;
             bottom: 75px !important;
             right: 25px !important;
@@ -80,7 +81,9 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
             margin: 0 !important;
         }
 
-        /* Executive High-Visibility Gradient Button (High Specificity) */
+        /* Executive High-Visibility Gradient Button (Target exact button child) */
+        html body div.stApp [data-testid="stMainBlockContainer"] > div[data-testid="stElementContainer"]:last-child button,
+        html body div.stApp .main .block-container > div.element-container:last-child button,
         html body div.stApp [data-testid="stPopover"] button,
         html body div.stApp [data-testid="stPopoverButton"] button,
         html body div.stApp button[data-testid="stBaseButton-popover"],
@@ -102,8 +105,8 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
             display: inline-flex !important;
             align-items: center !important;
         }
+        html body div.stApp [data-testid="stMainBlockContainer"] > div[data-testid="stElementContainer"]:last-child button:hover,
         html body div.stApp [data-testid="stPopover"] button:hover,
-        html body div.stApp [data-testid="stPopoverButton"] button:hover,
         html body div.stApp button[data-testid="stBaseButton-popover"]:hover,
         html body div.stApp button[aria-haspopup="dialog"]:hover {
             background: linear-gradient(135deg, #1E3A8A 0%, #1D4ED8 100%) !important;
@@ -111,8 +114,8 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
             transform: translateY(-3px) scale(1.03) !important;
             box-shadow: 0 14px 35px rgba(37, 99, 235, 0.6) !important;
         }
+        html body div.stApp [data-testid="stMainBlockContainer"] > div[data-testid="stElementContainer"]:last-child button *,
         html body div.stApp [data-testid="stPopover"] button *,
-        html body div.stApp [data-testid="stPopoverButton"] button *,
         html body div.stApp button[data-testid="stBaseButton-popover"] *,
         html body div.stApp button[aria-haspopup="dialog"] * {
             color: #FFFFFF !important;
