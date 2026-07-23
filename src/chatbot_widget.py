@@ -57,71 +57,59 @@ def query_chatbot_groq(messages_history, page_type, job_name, category_name, sta
 
 def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
     """
-    Renders a highly visible, modern Executive Strategy AI Advisor pop-up widget.
+    Renders a highly visible, modern Executive Strategy AI Advisor pop-up widget in the Sidebar.
     """
     st.markdown("""
     <style>
         /* Pulse Animation for Chatbot Glow */
         @keyframes pulseGlow {
             0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.5); }
-            70% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
+            70% { box-shadow: 0 0 0 14px rgba(37, 99, 235, 0); }
             100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
         }
 
         @keyframes floatBounce {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
+            50% { transform: translateY(-4px); }
         }
 
-        /* Single Floating Pill Popover Button at Bottom-Right (Floating above Host Toolbar) */
-        div[data-testid="stAppViewContainer"] div[data-testid="stPopover"],
-        html body div.stApp div[data-testid="stPopover"] {
-            position: fixed !important;
-            bottom: 75px !important;
-            right: 25px !important;
-            z-index: 999999 !important;
-            width: auto !important;
-            height: auto !important;
-        }
-
-        div[data-testid="stPopover"] > button {
-            width: auto !important;
-            white-space: nowrap !important;
+        /* Sidebar Chatbot Popover Styling (100% Clean & Stable Layout) */
+        [data-testid="stSidebar"] [data-testid="stPopover"] button,
+        [data-testid="stSidebar"] button[aria-haspopup="dialog"] {
             background: linear-gradient(135deg, #1E40AF 0%, #2563EB 100%) !important;
             color: #FFFFFF !important;
-            border: 1px solid rgba(255, 255, 255, 0.35) !important;
-            border-radius: 30px !important;
-            padding: 0.65rem 1.4rem !important;
-            font-weight: 700 !important;
-            font-size: 0.88rem !important;
-            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.35) !important;
-            animation: floatBounce 2.5s infinite ease-in-out !important;
-            display: flex !important;
-            align-items: center !important;
-            gap: 8px !important;
+            border-radius: 14px !important;
+            padding: 0.75rem 1rem !important;
+            border: 1px solid rgba(255, 255, 255, 0.4) !important;
+            font-weight: 800 !important;
+            font-size: 0.92rem !important;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35) !important;
+            margin-top: 15px !important;
+            margin-bottom: 10px !important;
+            width: 100% !important;
         }
-        div[data-testid="stPopover"] > button:hover {
+        [data-testid="stSidebar"] [data-testid="stPopover"] button:hover,
+        [data-testid="stSidebar"] button[aria-haspopup="dialog"]:hover {
             background: linear-gradient(135deg, #1E3A8A 0%, #1D4ED8 100%) !important;
-            border-color: rgba(255, 255, 255, 0.6) !important;
-            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.5) !important;
+            box-shadow: 0 6px 18px rgba(37, 99, 235, 0.5) !important;
         }
-        div[data-testid="stPopover"] > button * {
+        [data-testid="stSidebar"] [data-testid="stPopover"] button * {
             color: #FFFFFF !important;
-            font-weight: 700 !important;
+            font-weight: 800 !important;
         }
 
         /* Pop-up Window Dimensions & Style */
         div[data-testid="stPopoverBody"] {
-            width: 480px !important;
-            max-height: 640px !important;
+            width: 490px !important;
+            max-height: 680px !important;
             border-radius: 18px !important;
-            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.25) !important;
+            box-shadow: 0 25px 50px rgba(15, 23, 42, 0.25) !important;
             border: 1px solid #E2E8F0 !important;
             background: #FFFFFF !important;
-            padding: 1.1rem !important;
+            padding: 1.2rem !important;
         }
 
-        /* Equalize Height & Symmetry for Quick Question Buttons */
+        /* Equalize Height & Style for Quick Question Buttons */
         div[data-testid="stPopoverBody"] div[data-testid="column"] button {
             min-height: 42px !important;
             height: 42px !important;
@@ -178,15 +166,15 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
         st.session_state[history_key] = [
             {
                 "role": "assistant",
-                "content": f"👋 Kính chào Quản lý! Tôi là **Cố Vấn Chiến Lược Doanh Nghiệp**.\n\n"
+                "content": f"👋 Kính chào Quản lý! Tôi là **Trợ Lý Chiến Lược AI Agent**.\n\n"
                            f"Tôi sẵn sàng giải đáp mọi thắc mắc về dữ liệu & biểu đồ trên trang **{page_type}** "
                            f"cho hồ sơ **{job_name}** ({category_name}).\n\n"
                            f"Vui lòng bấm chọn các câu hỏi gợi ý nhanh bên dưới hoặc gõ thắc mắc của bạn!"
             }
         ]
 
-    # ── SINGLE FLOATING PILL POPOVER BUTTON ──
-    with st.popover("💬  Nhận Tư Vấn Chiến Lược Quản Trị", use_container_width=False):
+    # ── CLEAN STABLE SIDEBAR POPOVER ──
+    with st.sidebar.popover("🤖 Hỏi AI Trợ Lý Về Trang Này", use_container_width=True):
         st.markdown(f"""
         <div class="chat-header-v2">
             <div class="icon-box"><i class="fa-solid fa-headset"></i></div>
@@ -205,7 +193,7 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
                 with st.chat_message(msg["role"]):
                     st.markdown(msg["content"])
 
-        # ── 2. FLOATING QUICK SUGGESTION CHIPS (RIGHT ABOVE CHAT INPUT) ──
+        # ── 2. QUICK SUGGESTION CHIPS ──
         st.markdown("<div style='margin-top: 6px; margin-bottom: 2px; font-size: 0.75rem; color: #64748B; font-weight: 600;'>💡 Gợi ý câu hỏi nhanh:</div>", unsafe_allow_html=True)
         col1, col2 = st.columns(2)
         q_clicked = None
