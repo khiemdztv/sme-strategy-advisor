@@ -136,25 +136,34 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
             font-weight: 800 !important;
         }
 
-        /* ── 3. POP-UP DIALOG WINDOW STYLING (ANCHORED TO BOTTOM-RIGHT ABOVE BUTTON) ── */
-        html body div.stApp div[data-testid="stPopoverBody"],
+        /* ── 3. POP-UP DIALOG WINDOW STYLING (FORCE SNAP TO RIGHT & ABOVE BUTTON) ── */
+        div[data-baseweb="popover"],
+        div[data-baseweb="popover"] > div,
         div[data-testid="stPopoverBody"],
-        div[data-baseweb="popover"] {
+        html body div.stApp div[data-testid="stPopoverBody"] {
             position: fixed !important;
             bottom: 140px !important;
             right: 25px !important;
-            left: auto !important;
             top: auto !important;
+            left: auto !important;
+            transform: translate3d(0px, 0px, 0px) !important;
+            margin: 0 !important;
             width: 490px !important;
             max-width: calc(100vw - 40px) !important;
             max-height: 680px !important;
             border-radius: 18px !important;
-            box-shadow: 0 25px 50px rgba(15, 23, 42, 0.25) !important;
+            box-shadow: 0 25px 50px rgba(15, 23, 42, 0.3) !important;
             border: 1px solid #E2E8F0 !important;
             background: #FFFFFF !important;
             padding: 1.2rem !important;
-            z-index: 1000000 !important;
-            transform: none !important;
+            z-index: 9999999 !important;
+        }
+
+        div[data-baseweb="popover"] {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            padding: 0 !important;
         }
 
         /* Quick Suggestion Chips */
