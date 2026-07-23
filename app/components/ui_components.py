@@ -62,7 +62,9 @@ def inject_custom_css():
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
         }
 
-        /* Hide Streamlit default sidebar header & collapse top gap */
+        /* Hide Streamlit default sidebar nav items & header to collapse top gap */
+        [data-testid="stSidebarNav"],
+        div[data-testid="stSidebarNav"],
         [data-testid="stSidebarHeader"] {
             display: none !important;
             height: 0px !important;
