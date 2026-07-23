@@ -136,28 +136,29 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
             font-weight: 800 !important;
         }
 
-        /* ── 3. POP-UP DIALOG WINDOW STYLING (FITTED & COMPACT FOR ALL SCREENS) ── */
+        /* ── 3. POP-UP DIALOG WINDOW STYLING (OVERRIDE INLINE BASEWEB LEFT OFFSET) ── */
         [data-baseweb="portal"] [data-baseweb="popover"],
         div[data-baseweb="popover"],
         div[data-baseweb="popover"] > div,
         div[data-testid="stPopoverBody"],
         html body div[data-testid="stPopoverBody"] {
             position: fixed !important;
-            bottom: 80px !important;
-            right: 25px !important;
+            bottom: 75px !important;
+            right: 20px !important;
             left: auto !important;
             top: auto !important;
             transform: none !important;
             margin: 0 !important;
-            width: 430px !important;
-            max-width: calc(100vw - 40px) !important;
-            max-height: calc(100vh - 100px) !important;
+            width: 420px !important;
+            max-width: calc(100vw - 30px) !important;
+            max-height: calc(100vh - 85px) !important;
             border-radius: 18px !important;
             box-shadow: 0 25px 50px rgba(15, 23, 42, 0.35) !important;
             border: 1.5px solid #E2E8F0 !important;
             background: #FFFFFF !important;
-            padding: 1rem !important;
+            padding: 0.85rem !important;
             z-index: 9999999 !important;
+            overflow-y: auto !important;
         }
 
         /* Ensure dropdown menus (selectbox/multiselect) retain normal positioning */
@@ -169,14 +170,14 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
             width: auto !important;
         }
 
-        /* Quick Suggestion Chips (Compact Height) */
+        /* Quick Suggestion Chips (Fitted Compact Style) */
         div[data-testid="stPopoverBody"] div[data-testid="column"] button {
-            min-height: 36px !important;
-            height: 36px !important;
-            border-radius: 10px !important;
-            font-size: 0.75rem !important;
+            min-height: 32px !important;
+            height: 32px !important;
+            border-radius: 8px !important;
+            font-size: 0.72rem !important;
             font-weight: 600 !important;
-            padding: 0.2rem 0.4rem !important;
+            padding: 0.15rem 0.3rem !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
@@ -195,29 +196,29 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
         .chat-header-v2 {
             background: linear-gradient(135deg, #0F172A 0%, #1E3A8A 100%);
             color: #FFFFFF;
-            padding: 0.75rem 1rem;
-            border-radius: 14px;
-            margin-bottom: 0.6rem;
+            padding: 0.6rem 0.85rem;
+            border-radius: 12px;
+            margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
         }
         .chat-header-v2 .icon-box {
-            width: 38px;
-            height: 38px;
+            width: 34px;
+            height: 34px;
             background: rgba(255, 255, 255, 0.12);
-            border-radius: 10px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: #60A5FA;
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        .chat-header-v2 .title { font-weight: 800; font-size: 0.92rem; color: #FFFFFF !important; }
-        .chat-header-v2 .subtitle { font-size: 0.74rem; color: #93C5FD; font-weight: 500; margin-top: 2px; }
-        .chat-header-v2 .status { font-size: 0.7rem; color: #4ADE80; font-weight: 600; margin-top: 2px; display: flex; align-items: center; gap: 6px; }
+        .chat-header-v2 .title { font-weight: 800; font-size: 0.88rem; color: #FFFFFF !important; }
+        .chat-header-v2 .subtitle { font-size: 0.72rem; color: #93C5FD; font-weight: 500; margin-top: 1px; }
+        .chat-header-v2 .status { font-size: 0.68rem; color: #4ADE80; font-weight: 600; margin-top: 1px; display: flex; align-items: center; gap: 6px; }
     </style>
     """, unsafe_allow_html=True)
 
@@ -226,10 +227,8 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
         st.session_state[history_key] = [
             {
                 "role": "assistant",
-                "content": f"👋 Kính chào Quản lý! Tôi là **Trợ Lý Chiến Lược AI Agent**.\n\n"
-                           f"Tôi sẵn sàng giải đáp mọi thắc mắc về dữ liệu & biểu đồ trên trang **{page_type}** "
-                           f"cho hồ sơ **{job_name}** ({category_name}).\n\n"
-                           f"Vui lòng bấm chọn các câu hỏi gợi ý nhanh bên dưới hoặc gõ thắc mắc của bạn!"
+                "content": f"👋 **Xin chào Quản lý!** Tôi là **Trợ Lý Chiến Lược AI Agent**.\n"
+                           f"Tôi sẵn sàng giải đáp thắc mắc về dữ liệu & chiến lược trang **{page_type}** cho hồ sơ **{job_name}**."
             }
         ]
 
@@ -246,15 +245,15 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
         </div>
         """, unsafe_allow_html=True)
 
-        # ── 1. CHAT MESSAGES HISTORY (FITTED HEIGHT: 230PX) ──
-        chat_container = st.container(height=230)
+        # ── 1. CHAT MESSAGES HISTORY (PERFECT COMPACT HEIGHT: 180PX) ──
+        chat_container = st.container(height=180)
         with chat_container:
             for msg in st.session_state[history_key]:
                 with st.chat_message(msg["role"]):
                     st.markdown(msg["content"])
 
         # ── 2. QUICK SUGGESTION CHIPS ──
-        st.markdown("<div style='margin-top: 6px; margin-bottom: 2px; font-size: 0.75rem; color: #64748B; font-weight: 600;'>💡 Gợi ý câu hỏi nhanh:</div>", unsafe_allow_html=True)
+        st.markdown("<div style='margin-top: 4px; margin-bottom: 2px; font-size: 0.72rem; color: #64748B; font-weight: 600;'>💡 Gợi ý câu hỏi nhanh:</div>", unsafe_allow_html=True)
         col1, col2 = st.columns(2)
         q_clicked = None
         with col1:
@@ -283,6 +282,7 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
 
             st.session_state[history_key].append({"role": "assistant", "content": reply})
             st.rerun()
+
 
 
 
