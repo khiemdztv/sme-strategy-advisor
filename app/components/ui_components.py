@@ -349,25 +349,25 @@ def inject_custom_css():
         .badge-ready      { background: #DCFCE7; color: #15803D; border: 1px solid #86EFAC; }
         .badge-anxious    { background: #FEE2E2; color: #B91C1C; border: 1px solid #FCA5A5; }
         .badge-conflict   { background: #FEF3C7; color: #B45309; border: 1px solid #FDE68A; }
-        /* Global Chatbot Pop-up Window Positioning (Force snap to far right edge of viewport) */
+        /* Global Chatbot Pop-up Window Positioning (Fitted & Compact for all screen heights) */
         [data-baseweb="portal"] [data-baseweb="popover"]:not(:has([data-baseweb="menu"])),
         div[data-baseweb="popover"]:not(:has(ul[role="listbox"])),
         div[data-testid="stPopoverBody"] {
             position: fixed !important;
-            bottom: 140px !important;
+            bottom: 80px !important;
             right: 25px !important;
             left: auto !important;
             top: auto !important;
             transform: none !important;
             margin: 0 !important;
-            width: 490px !important;
+            width: 430px !important;
             max-width: calc(100vw - 40px) !important;
-            max-height: 680px !important;
+            max-height: calc(100vh - 100px) !important;
             border-radius: 18px !important;
             box-shadow: 0 25px 50px rgba(15, 23, 42, 0.35) !important;
             border: 1.5px solid #E2E8F0 !important;
             background: #FFFFFF !important;
-            padding: 1.2rem !important;
+            padding: 1rem !important;
             z-index: 9999999 !important;
         }
 
