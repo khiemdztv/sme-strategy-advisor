@@ -136,15 +136,25 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
             font-weight: 800 !important;
         }
 
-        /* ── 3. POP-UP DIALOG WINDOW STYLING ── */
-        div[data-testid="stPopoverBody"] {
+        /* ── 3. POP-UP DIALOG WINDOW STYLING (ANCHORED TO BOTTOM-RIGHT ABOVE BUTTON) ── */
+        html body div.stApp div[data-testid="stPopoverBody"],
+        div[data-testid="stPopoverBody"],
+        div[data-baseweb="popover"] {
+            position: fixed !important;
+            bottom: 140px !important;
+            right: 25px !important;
+            left: auto !important;
+            top: auto !important;
             width: 490px !important;
+            max-width: calc(100vw - 40px) !important;
             max-height: 680px !important;
             border-radius: 18px !important;
             box-shadow: 0 25px 50px rgba(15, 23, 42, 0.25) !important;
             border: 1px solid #E2E8F0 !important;
             background: #FFFFFF !important;
             padding: 1.2rem !important;
+            z-index: 1000000 !important;
+            transform: none !important;
         }
 
         /* Quick Suggestion Chips */
