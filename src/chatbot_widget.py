@@ -94,8 +94,10 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
         }
 
         /* ── 2. FLOATING POPOVER BUTTON STYLING (FLOATING AT BOTTOM-RIGHT) ── */
-        div[data-testid="stPopover"],
-        button[data-testid="stBaseButton-popover"],
+        html body div.stApp div[data-testid="stPopover"] button,
+        html body div.stApp button[data-testid="stBaseButton-popover"],
+        html body div.stApp div[data-testid="stPopoverButton"] button,
+        html body div.stApp button[aria-haspopup="dialog"],
         div[data-testid="stPopover"] > button {
             position: fixed !important;
             bottom: 75px !important;
@@ -105,6 +107,7 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
             height: auto !important;
             white-space: nowrap !important;
             background: linear-gradient(135deg, #1E40AF 0%, #2563EB 100%) !important;
+            background-color: #2563EB !important;
             color: #FFFFFF !important;
             border: 1.5px solid rgba(255, 255, 255, 0.45) !important;
             border-radius: 30px !important;
@@ -117,15 +120,19 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
             align-items: center !important;
             gap: 8px !important;
         }
-        div[data-testid="stPopover"] > button:hover,
-        button[data-testid="stBaseButton-popover"]:hover {
+        html body div.stApp div[data-testid="stPopover"] button:hover,
+        html body div.stApp button[data-testid="stBaseButton-popover"]:hover,
+        div[data-testid="stPopover"] > button:hover {
             background: linear-gradient(135deg, #1E3A8A 0%, #1D4ED8 100%) !important;
+            background-color: #1D4ED8 !important;
             box-shadow: 0 12px 32px rgba(37, 99, 235, 0.6) !important;
             transform: translateY(-2px) scale(1.02) !important;
         }
-        div[data-testid="stPopover"] > button *,
-        button[data-testid="stBaseButton-popover"] * {
+        html body div.stApp div[data-testid="stPopover"] button *,
+        html body div.stApp button[data-testid="stBaseButton-popover"] *,
+        div[data-testid="stPopover"] > button * {
             color: #FFFFFF !important;
+            fill: #FFFFFF !important;
             font-weight: 800 !important;
         }
 
