@@ -77,9 +77,9 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
         /* ── 1. COLLAPSE STWRAPPER CONTAINER TO 0PX TO PREVENT BOTTOM BAR ── */
         div[data-testid="stElementContainer"]:has(div[data-testid="stPopover"]),
         div[data-testid="stElementContainer"]:has(button[data-testid="stBaseButton-popover"]),
-        .element-container:has(div[data-testid="stPopover"]) {
+        div[data-testid="stPopover"] {
             position: fixed !important;
-            bottom: 75px !important;
+            bottom: 25px !important;
             right: 25px !important;
             width: 0px !important;
             height: 0px !important;
@@ -93,29 +93,49 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
             overflow: visible !important;
         }
 
-        /* ── 2. FLOATING POPOVER BUTTON STYLING (FLOATING AT BOTTOM-RIGHT) ── */
+        /* ── FLOATING CALLOUT BADGE (TOP PILL) ── */
+        .chat-callout-badge-v3 {
+            position: fixed !important;
+            bottom: 75px !important;
+            right: 25px !important;
+            z-index: 999998 !important;
+            background: #F8FAFC !important;
+            border: 1px solid #CBD5E1 !important;
+            border-radius: 12px !important;
+            padding: 5px 14px !important;
+            font-size: 0.82rem !important;
+            font-weight: 700 !important;
+            color: #1E3A8A !important;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08) !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 7px !important;
+            white-space: nowrap !important;
+            animation: floatBounce 2.5s infinite ease-in-out !important;
+        }
+
+        /* ── 2. FLOATING POPOVER BUTTON STYLING (WHITE PILL LIKE SCREENSHOT) ── */
         html body div.stApp div[data-testid="stPopover"] button,
         html body div.stApp button[data-testid="stBaseButton-popover"],
         html body div.stApp div[data-testid="stPopoverButton"] button,
         html body div.stApp button[aria-haspopup="dialog"],
         div[data-testid="stPopover"] > button {
             position: fixed !important;
-            bottom: 75px !important;
+            bottom: 25px !important;
             right: 25px !important;
             z-index: 999999 !important;
             width: auto !important;
             height: auto !important;
             white-space: nowrap !important;
-            background: linear-gradient(135deg, #1E40AF 0%, #2563EB 100%) !important;
-            background-color: #2563EB !important;
-            color: #FFFFFF !important;
-            border: 1.5px solid rgba(255, 255, 255, 0.45) !important;
-            border-radius: 30px !important;
-            padding: 0.7rem 1.4rem !important;
-            font-weight: 800 !important;
+            background: #FFFFFF !important;
+            background-color: #FFFFFF !important;
+            color: #1E293B !important;
+            border: 1.5px solid #CBD5E1 !important;
+            border-radius: 12px !important;
+            padding: 0.55rem 1.1rem !important;
+            font-weight: 700 !important;
             font-size: 0.88rem !important;
-            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.45) !important;
-            animation: floatBounce 2.5s infinite ease-in-out !important;
+            box-shadow: 0 4px 16px rgba(15, 23, 42, 0.1) !important;
             display: flex !important;
             align-items: center !important;
             gap: 8px !important;
@@ -123,17 +143,18 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
         html body div.stApp div[data-testid="stPopover"] button:hover,
         html body div.stApp button[data-testid="stBaseButton-popover"]:hover,
         div[data-testid="stPopover"] > button:hover {
-            background: linear-gradient(135deg, #1E3A8A 0%, #1D4ED8 100%) !important;
-            background-color: #1D4ED8 !important;
-            box-shadow: 0 12px 32px rgba(37, 99, 235, 0.6) !important;
-            transform: translateY(-2px) scale(1.02) !important;
+            background: #F8FAFC !important;
+            background-color: #F8FAFC !important;
+            border-color: #94A3B8 !important;
+            box-shadow: 0 6px 20px rgba(15, 23, 42, 0.15) !important;
+            transform: translateY(-2px) !important;
         }
         html body div.stApp div[data-testid="stPopover"] button *,
         html body div.stApp button[data-testid="stBaseButton-popover"] *,
         div[data-testid="stPopover"] > button * {
-            color: #FFFFFF !important;
-            fill: #FFFFFF !important;
-            font-weight: 800 !important;
+            color: #1E293B !important;
+            fill: #1E293B !important;
+            font-weight: 700 !important;
         }
 
         /* ── 3. POP-UP DIALOG WINDOW STYLING (OVERRIDE INLINE BASEWEB LEFT OFFSET) ── */
@@ -143,7 +164,7 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
         div[data-testid="stPopoverBody"],
         html body div[data-testid="stPopoverBody"] {
             position: fixed !important;
-            bottom: 75px !important;
+            bottom: 85px !important;
             right: 20px !important;
             left: auto !important;
             top: auto !important;
@@ -151,7 +172,7 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
             margin: 0 !important;
             width: 420px !important;
             max-width: calc(100vw - 30px) !important;
-            max-height: calc(100vh - 85px) !important;
+            max-height: calc(100vh - 100px) !important;
             border-radius: 18px !important;
             box-shadow: 0 25px 50px rgba(15, 23, 42, 0.35) !important;
             border: 1.5px solid #E2E8F0 !important;
@@ -232,8 +253,15 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
             }
         ]
 
-    # ── SINGLE FLOATING PILL POPOVER BUTTON (BOTTOM RIGHT) ──
-    with st.popover("💡  Thắc mắc về trang này? Hỏi AI Advisor ngay!", use_container_width=False):
+    # ── FLOATING CALLOUT BADGE & POPOVER BUTTON (MATCHING USER SCREENSHOT) ──
+    st.markdown("""
+    <div class="chat-callout-badge-v3">
+        <i class="fa-solid fa-user-tie" style="color: #1E3A8A; font-size: 0.9rem;"></i>
+        <span>Cố Vấn Chiến Lược SME</span>
+    </div>
+    """, unsafe_allow_html=True)
+
+    with st.popover("💼  Hỏi Cố Vấn Chiến Lược", use_container_width=False):
         st.markdown(f"""
         <div class="chat-header-v2">
             <div class="icon-box"><i class="fa-solid fa-headset"></i></div>
