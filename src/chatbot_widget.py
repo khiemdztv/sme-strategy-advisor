@@ -136,13 +136,12 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
             font-weight: 800 !important;
         }
 
-        /* ── 3. POP-UP DIALOG WINDOW STYLING (FORCE SNAP FLUSH TO FAR RIGHT OF VIEWPORT) ── */
-        div[data-baseweb="popover"]:has(.chat-header-v2),
-        div[data-baseweb="popover"]:has([data-testid="stPopoverBody"]),
-        div[data-baseweb="popover"]:has(.chat-header-v2) > div,
-        div[data-baseweb="popover"]:has([data-testid="stPopoverBody"]) > div,
+        /* ── 3. POP-UP DIALOG WINDOW STYLING (OVERRIDE INLINE BASEWEB LEFT OFFSET) ── */
+        [data-baseweb="portal"] [data-baseweb="popover"],
+        div[data-baseweb="popover"],
+        div[data-baseweb="popover"] > div,
         div[data-testid="stPopoverBody"],
-        html body div.stApp div[data-testid="stPopoverBody"] {
+        html body div[data-testid="stPopoverBody"] {
             position: fixed !important;
             bottom: 140px !important;
             right: 25px !important;
@@ -161,13 +160,13 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
             z-index: 9999999 !important;
         }
 
-        div[data-baseweb="popover"]:has(.chat-header-v2),
-        div[data-baseweb="popover"]:has([data-testid="stPopoverBody"]) {
-            background: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-            padding: 0 !important;
-            overflow: visible !important;
+        /* Ensure dropdown menus (selectbox/multiselect) retain normal positioning */
+        [data-baseweb="portal"] [data-baseweb="popover"]:has([data-baseweb="menu"]),
+        div[data-baseweb="popover"]:has(ul[role="listbox"]) {
+            position: absolute !important;
+            bottom: auto !important;
+            right: auto !important;
+            width: auto !important;
         }
 
         /* Quick Suggestion Chips */

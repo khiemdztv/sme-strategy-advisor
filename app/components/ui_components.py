@@ -349,7 +349,36 @@ def inject_custom_css():
         .badge-ready      { background: #DCFCE7; color: #15803D; border: 1px solid #86EFAC; }
         .badge-anxious    { background: #FEE2E2; color: #B91C1C; border: 1px solid #FCA5A5; }
         .badge-conflict   { background: #FEF3C7; color: #B45309; border: 1px solid #FDE68A; }
-        .badge-engaged    { background: #DBEAFE; color: #1D4ED8; border: 1px solid #93C5FD; }
+        /* Global Chatbot Pop-up Window Positioning (Force snap to far right edge of viewport) */
+        [data-baseweb="portal"] [data-baseweb="popover"]:not(:has([data-baseweb="menu"])),
+        div[data-baseweb="popover"]:not(:has(ul[role="listbox"])),
+        div[data-testid="stPopoverBody"] {
+            position: fixed !important;
+            bottom: 140px !important;
+            right: 25px !important;
+            left: auto !important;
+            top: auto !important;
+            transform: none !important;
+            margin: 0 !important;
+            width: 490px !important;
+            max-width: calc(100vw - 40px) !important;
+            max-height: 680px !important;
+            border-radius: 18px !important;
+            box-shadow: 0 25px 50px rgba(15, 23, 42, 0.35) !important;
+            border: 1.5px solid #E2E8F0 !important;
+            background: #FFFFFF !important;
+            padding: 1.2rem !important;
+            z-index: 9999999 !important;
+        }
+
+        /* Ensure dropdown menus (selectbox/multiselect) retain normal positioning */
+        [data-baseweb="portal"] [data-baseweb="popover"]:has([data-baseweb="menu"]),
+        div[data-baseweb="popover"]:has(ul[role="listbox"]) {
+            position: absolute !important;
+            bottom: auto !important;
+            right: auto !important;
+            width: auto !important;
+        }
     </style>
     """, unsafe_allow_html=True)
 
