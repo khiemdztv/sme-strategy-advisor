@@ -62,18 +62,16 @@ def inject_custom_css():
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
         }
 
-        [data-testid="stSidebar"] > div:first-child {
-            padding: 0 !important;
-            height: 100% !important;
-            display: flex !important;
-            flex-direction: column !important;
-        }
-
-        /* Hide Streamlit default sidebar nav items */
-        [data-testid="stSidebarNav"] {
+        /* Hide Streamlit default sidebar header & collapse top gap */
+        [data-testid="stSidebarHeader"] {
             display: none !important;
+            height: 0px !important;
+            min-height: 0px !important;
+            padding: 0px !important;
+            margin: 0px !important;
         }
 
+        [data-testid="stSidebar"] > div:first-child,
         [data-testid="stSidebarUserContent"],
         [data-testid="stSidebarContent"] {
             padding-top: 0rem !important;
@@ -83,13 +81,14 @@ def inject_custom_css():
         /* ── 1. HEADER (Positioned Flush at Top) ── */
         .bi-sidebar-header {
             flex: 0 0 auto;
-            min-height: 75px !important;
-            padding: 20px 20px 18px 20px !important;
+            min-height: 70px !important;
+            padding: 16px 20px 14px 20px !important;
             display: flex !important;
             align-items: center !important;
             gap: 12px !important;
             border-bottom: 1px solid #F3F4F6 !important;
             background: #FFFFFF !important;
+            margin-top: 0px !important;
         }
         .bi-logo-icon {
             width: 42px !important;

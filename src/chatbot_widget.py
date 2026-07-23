@@ -57,14 +57,15 @@ def query_chatbot_groq(messages_history, page_type, job_name, category_name, sta
 
 def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
     """
-    Renders a highly visible, modern Executive Strategy AI Advisor pop-up widget in the Sidebar.
+    Renders a highly visible, modern Executive Strategy AI Advisor floating pop-up widget.
+    Fully collapses the Streamlit element container wrapper to 0px height to prevent any bottom white bar.
     """
     st.markdown("""
     <style>
         /* Pulse Animation for Chatbot Glow */
         @keyframes pulseGlow {
             0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.5); }
-            70% { box-shadow: 0 0 0 14px rgba(37, 99, 235, 0); }
+            70% { box-shadow: 0 0 0 12px rgba(37, 99, 235, 0); }
             100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
         }
 
@@ -73,32 +74,62 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
             50% { transform: translateY(-4px); }
         }
 
-        /* Sidebar Chatbot Popover Styling (100% Clean & Stable Layout) */
-        [data-testid="stSidebar"] [data-testid="stPopover"] button,
-        [data-testid="stSidebar"] button[aria-haspopup="dialog"] {
+        /* ── 1. COLLAPSE STWRAPPER CONTAINER TO 0PX TO PREVENT BOTTOM BAR ── */
+        div[data-testid="stElementContainer"]:has(div[data-testid="stPopover"]),
+        div[data-testid="stElementContainer"]:has(button[data-testid="stBaseButton-popover"]),
+        .element-container:has(div[data-testid="stPopover"]) {
+            position: fixed !important;
+            bottom: 75px !important;
+            right: 25px !important;
+            width: 0px !important;
+            height: 0px !important;
+            min-height: 0px !important;
+            max-height: 0px !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            border: none !important;
+            background: transparent !important;
+            z-index: 999999 !important;
+            overflow: visible !important;
+        }
+
+        /* ── 2. FLOATING POPOVER BUTTON STYLING (FLOATING AT BOTTOM-RIGHT) ── */
+        div[data-testid="stPopover"],
+        button[data-testid="stBaseButton-popover"],
+        div[data-testid="stPopover"] > button {
+            position: fixed !important;
+            bottom: 75px !important;
+            right: 25px !important;
+            z-index: 999999 !important;
+            width: auto !important;
+            height: auto !important;
+            white-space: nowrap !important;
             background: linear-gradient(135deg, #1E40AF 0%, #2563EB 100%) !important;
             color: #FFFFFF !important;
-            border-radius: 14px !important;
-            padding: 0.75rem 1rem !important;
-            border: 1px solid rgba(255, 255, 255, 0.4) !important;
+            border: 1.5px solid rgba(255, 255, 255, 0.45) !important;
+            border-radius: 30px !important;
+            padding: 0.7rem 1.4rem !important;
             font-weight: 800 !important;
-            font-size: 0.92rem !important;
-            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35) !important;
-            margin-top: 15px !important;
-            margin-bottom: 10px !important;
-            width: 100% !important;
+            font-size: 0.88rem !important;
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.45) !important;
+            animation: floatBounce 2.5s infinite ease-in-out !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 8px !important;
         }
-        [data-testid="stSidebar"] [data-testid="stPopover"] button:hover,
-        [data-testid="stSidebar"] button[aria-haspopup="dialog"]:hover {
+        div[data-testid="stPopover"] > button:hover,
+        button[data-testid="stBaseButton-popover"]:hover {
             background: linear-gradient(135deg, #1E3A8A 0%, #1D4ED8 100%) !important;
-            box-shadow: 0 6px 18px rgba(37, 99, 235, 0.5) !important;
+            box-shadow: 0 12px 32px rgba(37, 99, 235, 0.6) !important;
+            transform: translateY(-2px) scale(1.02) !important;
         }
-        [data-testid="stSidebar"] [data-testid="stPopover"] button * {
+        div[data-testid="stPopover"] > button *,
+        button[data-testid="stBaseButton-popover"] * {
             color: #FFFFFF !important;
             font-weight: 800 !important;
         }
 
-        /* Pop-up Window Dimensions & Style */
+        /* ── 3. POP-UP DIALOG WINDOW STYLING ── */
         div[data-testid="stPopoverBody"] {
             width: 490px !important;
             max-height: 680px !important;
@@ -109,7 +140,7 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
             padding: 1.2rem !important;
         }
 
-        /* Equalize Height & Style for Quick Question Buttons */
+        /* Quick Suggestion Chips */
         div[data-testid="stPopoverBody"] div[data-testid="column"] button {
             min-height: 42px !important;
             height: 42px !important;
@@ -173,8 +204,8 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
             }
         ]
 
-    # ── CLEAN STABLE SIDEBAR POPOVER ──
-    with st.sidebar.popover("🤖 Hỏi AI Trợ Lý Về Trang Này", use_container_width=True):
+    # ── SINGLE FLOATING PILL POPOVER BUTTON (BOTTOM RIGHT) ──
+    with st.popover("💡  Thắc mắc về trang này? Hỏi AI Advisor ngay!", use_container_width=False):
         st.markdown(f"""
         <div class="chat-header-v2">
             <div class="icon-box"><i class="fa-solid fa-headset"></i></div>
