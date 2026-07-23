@@ -73,11 +73,11 @@ def render_floating_chatbot(page_type, job_name, category_name, stats_summary):
             50% { transform: translateY(-5px); }
         }
 
-        /* Single Floating Pill Popover Button at Bottom-Right Corner */
-        .stElementContainer:has(div[data-testid="stPopover"]),
-        div[data-testid="stPopover"] {
+        /* Single Floating Pill Popover Button at Bottom-Right (Floating above Host Toolbar) */
+        div[data-testid="stAppViewContainer"] div[data-testid="stPopover"],
+        html body div.stApp div[data-testid="stPopover"] {
             position: fixed !important;
-            bottom: 25px !important;
+            bottom: 75px !important;
             right: 25px !important;
             z-index: 999999 !important;
             width: auto !important;
