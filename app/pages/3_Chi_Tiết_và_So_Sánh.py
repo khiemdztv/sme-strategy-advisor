@@ -82,6 +82,72 @@ with col_insight:
         report1 = report1.replace(eng, vi)
     render_report_insight(proof1, cause1, report1)
 
+# ── Row 2: Cross-Industry / Cross-Category Comparison Chart ──
+st.markdown("<br>", unsafe_allow_html=True)
+col_cross_chart, col_cross_insight = st.columns([3.5, 2.5])
+
+with col_cross_chart:
+    st.markdown("""<div class="mockup-card">
+<div class="mockup-card-title">Bản Đồ So Sánh Mức Độ Sẵn Sàng Giữa Các Phân Khúc SME</div>
+<div class="mockup-card-subtitle">Đối chiếu Năng lực AI (C), Mong muốn (D) và % Thí điểm Ngay giữa 8 lĩnh vực SME</div>""", unsafe_allow_html=True)
+
+    df_all_scored = st.session_state.get("df_all_scored", df_recalc)
+    if "sme_category" not in df_all_scored.columns:
+        from mapping import filter_tasks_by_sme_profile
+        df_cross_data = filter_tasks_by_sme_profile(df_all_scored)
+    else:
+        df_cross_data = df_all_scored.copy()
+
+    if not df_cross_data.empty and "sme_category" in df_cross_data.columns:
+        cross_stats = df_cross_data.groupby("sme_category").agg(
+            avg_c=("norm_capability", lambda x: x.mean() * 100),
+            avg_d=("norm_desire", lambda x: x.mean() * 100),
+            pct_pilot=("risk_category", lambda x: (x == "ideal_pilot").sum() / len(x) * 100)
+        ).reset_index().sort_values("pct_pilot", ascending=False)
+
+        fig_cross = go.Figure()
+        fig_cross.add_trace(go.Bar(
+            name="Năng lực AI (C)",
+            x=cross_stats["sme_category"],
+            y=cross_stats["avg_c"],
+            marker_color="#2563EB",
+            text=[f"{v:.1f}%" for v in cross_stats["avg_c"]],
+            textposition="auto"
+        ))
+        fig_cross.add_trace(go.Bar(
+            name="Mong muốn (D)",
+            x=cross_stats["sme_category"],
+            y=cross_stats["avg_d"],
+            marker_color="#8B5CF6",
+            text=[f"{v:.1f}%" for v in cross_stats["avg_d"]],
+            textposition="auto"
+        ))
+        fig_cross.add_trace(go.Bar(
+            name="% Thí điểm Ngay",
+            x=cross_stats["sme_category"],
+            y=cross_stats["pct_pilot"],
+            marker_color="#22C55E",
+            text=[f"{v:.1f}%" for v in cross_stats["pct_pilot"]],
+            textposition="auto"
+        ))
+
+        fig_cross.update_layout(
+            barmode="group",
+            height=380,
+            template="plotly_white",
+            margin=dict(l=10, r=10, t=30, b=40),
+            xaxis_title="Lĩnh vực SME",
+            yaxis_title="Tỷ lệ %",
+            legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
+        )
+        st.plotly_chart(fig_cross, use_container_width=True)
+    st.markdown("</div>", unsafe_allow_html=True)
+
+with col_cross_insight:
+    proof_c, cause_c, report_c = cross_industry_insight(df_cross_data)
+    render_report_insight(proof_c, cause_c, report_c)
+
+
 stats_summary = (
     f"- Vị trí / Ngành đang chọn: {job_label}\n"
     f"- Điểm Ưu tiên TB: {avg_p:.1f}/100\n"

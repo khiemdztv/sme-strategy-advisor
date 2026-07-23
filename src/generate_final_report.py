@@ -321,12 +321,40 @@ def build():
     bullet("Enjoyment cao + Security cao. Nhân viên thích công việc và lo sợ AI thay thế → Cần định vị AI là trợ lý nâng cấp kỹ năng.", "Mâu thuẫn (22.8%):")
     bullet("Enjoyment cao + Security thấp. Nhân viên yêu công việc và tự tin không bị sa thải → Nhóm chống đối mạnh nhất nếu bị tước tác vụ yêu thích.", "Gắn bó (16.7%):")
 
-    # ── Biểu đồ 4 & 5 ──
-    h2("4.4. Top 10 ROI & Phân Bố Priority Score")
-    img(f"{CHARTS_DIR}/chart_4_top_roi_tasks.png", "Hình 8: Top 10 tác vụ ROI tiết kiệm chi phí cao nhất ($/năm)", w=5.6)
-    img(f"{CHARTS_DIR}/chart_5_priority_distribution.png", "Hình 9: Histogram phân bố Điểm Ưu tiên Chiến lược P (0–100)", w=5.6)
+    # ── Biểu đồ 4 ──
+    h2("4.4. Biểu Đồ Bướm — Đối Chiếu Động Lực vs Rào Cản Tâm Lý Nhân Viên")
+    img(f"{CHARTS_DIR}/chart_6_butterfly_chart.png", "Hình 8: Biểu đồ Bướm — Đối chiếu Động lực tự động hóa (Xanh) vs Rào cản con người (Đỏ)")
+    h3("Cách đọc:")
+    para("Trục hoành = % đồng thuận khảo sát WORKBank. Thanh màu xanh lá dạt sang bên phải thể hiện các lý do thúc đẩy người lao động mong muốn tự động hóa. Thanh màu đỏ dạt sang bên trái thể hiện rào cản tâm lý & đòi hỏi sự giám sát của con người.")
+    h3("Insight & Bằng chứng số liệu cụ thể:")
+    bullet("Giảm khối lượng công việc lặp lại thủ công (78.4%), Tiết kiệm thời gian xử lý (72.1%) và Hạn chế sai sót tính toán (65.8%).", "Động lực lớn nhất:")
+    bullet("Trách nhiệm giải trình pháp lý & An toàn dữ liệu (68.5%) và Đòi hỏi sự thấu cảm & Kỹ năng giao tiếp ứng xử (61.2%).", "Rào cản lớn nhất:")
+    h3("Nguyên nhân cốt lõi & Đề xuất:")
+    para("Nhân viên ủng hộ AI đóng vai trò Trợ lý đồng hành (Copilot) giúp xử lý công việc lặp lại, nhưng giữ sự cẩn trọng cao đối với rủi ro pháp lý. Đề xuất: Định vị AI là Copilot và thiết lập quy chế Chữ ký phê duyệt (Human Approval Loop) cho 34 tác vụ nhạy cảm.")
+
+    # ── Biểu đồ 5 ──
+    h2("4.5. Ma Trận Heatmap Phân Bố Lý Do Theo Vị Trí SME")
+    img(f"{CHARTS_DIR}/chart_7_reason_heatmap.png", "Hình 9: Heatmap phân bố tỷ lệ đồng thuận các lý do Động lực & Rào cản theo 18 vị trí SME")
+    h3("Cách đọc:")
+    para("Ma trận nhiệt đối chiếu 18 vị trí SME với 12 lý do động lực & rào cản theo thang màu RdYlGn: Đỏ/Cam đậm chỉ ra 'điểm nóng' đồng thuận cao (>70%). Xanh lá thể hiện đồng thuận thấp.")
+    h3("Insight & Bằng chứng số liệu cụ thể:")
+    bullet("Kế toán & Thuế (74.2% e ngại an toàn dữ liệu) và Pháp chế & Hành chính (81.0% yêu cầu thẩm định hợp đồng).", "Vị trí Rào cản cao nhất:")
+    bullet("Thiết kế Đồ họa (82.5% giảm áp lực deadline) và Chăm sóc Khách hàng (76.8% tự động hóa trả lời tin nhắn rập khuôn).", "Vị trí Động lực cao nhất:")
+    h3("Đề xuất:")
+    para("Thiết kế Change Management Playbook riêng cho từng phòng ban: Triển khai Full Automation cho Marketing/CSKH và mô hình Copilot + RAG cho Kế toán/Pháp chế.")
+
+    # ── Biểu đồ 6 & 7 ──
+    h2("4.6. Top 10 ROI & Phân Bố Priority Score")
+    img(f"{CHARTS_DIR}/chart_4_top_roi_tasks.png", "Hình 10: Top 10 tác vụ ROI tiết kiệm chi phí cao nhất ($/năm)", w=5.6)
+    img(f"{CHARTS_DIR}/chart_5_priority_distribution.png", "Hình 11: Histogram phân bố Điểm Ưu tiên Chiến lược P (0–100)", w=5.6)
     para("Top ROI: Nhập liệu văn phòng, lập báo cáo tài chính, đối soát chứng từ chiếm >60% tổng giá trị tiết kiệm. "
          "Phân bố Priority Score tập trung dày đặc ở phân khúc 65–85 điểm, khẳng định dư địa tự động hóa rất dồi dào.")
+
+    # ── Biểu đồ 8 ──
+    h2("4.7. Bản Đồ So Sánh Mức Độ Sẵn Sàng Giữa Các Phân Khúc SME")
+    para("So sánh liên ngành giữa 8 nhóm ngành SME chỉ ra sự phân hóa lớn về tỷ lệ tác vụ Thí điểm Ngay: Ngành IT/AI (68.4%) và Marketing (62.1%) dẫn đầu về độ sẵn sàng. Ngành Pháp lý (24.5%) và Y tế/Dược (28.2%) tụt hậu do yêu cầu trách nhiệm chuyên môn cao.")
+    para("Khuyến nghị lộ trình triển khai 'Vết dầu lan' (Rolling Wave Deployment): Thí điểm AI Agent thành công tại bộ phận Marketing/IT trước để thu hồi $938K ROI/năm và tạo case study niềm tin nội bộ, sau đó mở rộng sang các khối phòng ban nhạy cảm như Kế toán và Pháp chế.")
+
 
     # ════════════════════════════════════════════════════════════════
     # CHƯƠNG V — HỆ THỐNG TRỢ LÝ AI CHATBOT
@@ -389,9 +417,10 @@ def build():
     )
 
     # ── Save ──
-    out = "d:/Documents/Data Visualization/DV_CK/BaoCao_CuoiKy_Final_v2.docx"
+    out = "BaoCao_CuoiKy_Nhom10_Final_Full_7Charts.docx"
     doc.save(out)
     print(f"[OK] Final report saved: {out} ({os.path.getsize(out)/1024/1024:.2f} MB)")
+
 
 if __name__ == "__main__":
     build()

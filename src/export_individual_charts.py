@@ -169,5 +169,75 @@ def export_all_charts(data_file="data/processed/tasks_scored.csv", output_dir="d
     plt.close()
     print("Saved:", chart5_path)
 
+    # ═══════════════════════════════════════════════════════════════
+    # CHART 6: Butterfly Chart (Đối chiếu Động lực vs Rào cản)
+    # ═══════════════════════════════════════════════════════════════
+    reason_labels_vi = {
+        "reason_auto_free_time": "Tạo thời gian rảnh",
+        "reason_auto_repetitive": "Tác vụ lặp lại thủ công",
+        "reason_auto_human_error": "Giảm sai sót con người",
+        "reason_auto_stress": "Giảm áp lực mệt mỏi",
+        "reason_auto_difficulty": "Xử lý tác vụ phức tạp",
+        "reason_auto_scale": "Mở rộng quy mô công việc",
+        "reason_human_physical": "Thao tác vật lý trực tiếp",
+        "reason_human_control": "Giám sát & Kiểm soát con người",
+        "reason_human_domain": "Kiến thức chuyên môn sâu",
+        "reason_human_empathy": "Sự thấu cảm con người",
+        "reason_human_quality": "Giám sát chất lượng",
+        "reason_human_dynamic": "Tình huống linh hoạt",
+        "reason_human_ethical": "Ràng buộc đạo đức"
+    }
+    auto_cols = [c for c in df.columns if c.startswith("reason_auto_")]
+    human_cols = [c for c in df.columns if c.startswith("reason_human_")]
+
+    if auto_cols and human_cols:
+        auto_means = df[auto_cols].mean()
+        human_means = df[human_cols].mean()
+
+        auto_labels = [reason_labels_vi.get(c, c) for c in auto_means.index]
+        human_labels = [reason_labels_vi.get(c, c) for c in human_means.index]
+
+        fig, ax = plt.subplots(figsize=(10, 6.5), dpi=300)
+
+        ax.barh(human_labels, -human_means.values, color='#EF4444', height=0.6, label='Yêu cầu Con người (Rào cản)')
+        ax.barh(auto_labels, auto_means.values, color='#10B981', height=0.6, label='Động lực Tự động hóa')
+
+        ax.axvline(0, color='#94A3B8', linewidth=1.5)
+        ax.set_title("Biểu Đồ Bướm — Đối Chiếu Động Lực vs Rào Cản Tâm Lý Nhân Viên", fontsize=13, fontweight='bold', pad=15, color='#0F172A')
+        ax.set_xlabel("Tỷ lệ % Nhân sự Đồng thuận (%)", fontsize=10, fontweight='bold', color='#475569')
+        ax.legend(loc='upper right', frameon=True)
+        ax.grid(axis='x', linestyle='--', alpha=0.4)
+
+        for i, v in enumerate(human_means.values):
+            ax.text(-v - 3, i, f"{v:.1f}%", va='center', ha='right', fontsize=8.5, fontweight='bold', color='#991B1B')
+        for i, v in enumerate(auto_means.values):
+            ax.text(v + 1, i, f"{v:.1f}%", va='center', ha='left', fontsize=8.5, fontweight='bold', color='#065F46')
+
+        plt.tight_layout()
+        chart6_path = os.path.join(output_dir, "chart_6_butterfly_chart.png")
+        plt.savefig(chart6_path, dpi=300)
+        plt.close()
+        print("Saved:", chart6_path)
+
+    # ═══════════════════════════════════════════════════════════════
+    # CHART 7: Reason Heatmap by Role
+    # ═══════════════════════════════════════════════════════════════
+    all_reasons = auto_cols + human_cols
+    if all_reasons and role_col in df.columns:
+        grouped = df.groupby(role_col)[all_reasons].mean()
+        vi_cols = [reason_labels_vi.get(c, c) for c in all_reasons]
+        
+        fig, ax = plt.subplots(figsize=(12, 7.5), dpi=300)
+        sns.heatmap(grouped, annot=True, fmt=".1f", cmap="YlOrRd", ax=ax, xticklabels=vi_cols, yticklabels=grouped.index, cbar_kws={'label': '% Đồng ý'})
+        ax.set_title("Heatmap Phân Bố Lý Do Động Lực & Rào Cản Theo Vị Trí SME", fontsize=13, fontweight='bold', pad=15, color='#0F172A')
+        plt.xticks(rotation=45, ha='right', fontsize=9)
+        plt.yticks(fontsize=9)
+        plt.tight_layout()
+        chart7_path = os.path.join(output_dir, "chart_7_reason_heatmap.png")
+        plt.savefig(chart7_path, dpi=300)
+        plt.close()
+        print("Saved:", chart7_path)
+
 if __name__ == "__main__":
     export_all_charts()
+

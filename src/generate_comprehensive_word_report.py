@@ -27,8 +27,9 @@ def set_cell_margins(cell, top=140, bottom=140, left=180, right=180):
         tcMar.append(node)
     tcPr.append(tcMar)
 
-def create_comprehensive_report(output_file="d:/Documents/Data Visualization/DV_CK/BaoCao_HoanChinh_CuoiKy_TrucQuanHoaDuLieu_AI_Agent_SME.docx"):
+def create_comprehensive_report(output_file="BaoCao_HoanChinh_CuoiKy_TrucQuanHoaDuLieu_AI_Agent_SME.docx"):
     doc = docx.Document()
+
     
     # ── Page Margins (Standard Academic 2.54 cm = 1 inch) ──
     for section in doc.sections:
@@ -350,10 +351,50 @@ def create_comprehensive_report(output_file="d:/Documents/Data Visualization/DV_
         "giúp nhân sự làm việc nhanh hơn để họ nâng cao tay nghề chuyên môn."
     )
 
-    # ── 3.4. BIỂU ĐỒ 4 & 5: TOP ROI & PRIORITY DISTRIBUTION ──
-    add_h2("3.4. Biểu Đồ 4 & 5: Phân Tích ROI Tác Vụ & Mật Độ Điểm Ưu Tiên")
-    add_image_if_exists("data/reports/charts/chart_4_top_roi_tasks.png", "Hình 4: Biểu đồ Bar Top 10 Tác vụ Đem lại Giá trị ROI Tiết kiệm Chi phí Cao nhất ($/năm)", width_inches=5.8)
-    add_image_if_exists("data/reports/charts/chart_5_priority_distribution.png", "Hình 5: Biểu đồ Phân bố Mật độ Điểm Ưu Tiên Chiến Lược (Priority Score Distribution)", width_inches=5.8)
+    # ── 3.4. BIỂU ĐỒ 4: BUTTERFLY CHART ──
+    add_h2("3.4. Biểu Đồ 4: Biểu Đồ Bướm — Đối Chiếu Động Lực vs Rào Cản Tâm Lý Nhân Viên")
+    add_image_if_exists("data/reports/charts/chart_6_butterfly_chart.png", "Hình 4: Biểu đồ Bướm — Đối chiếu Động lực tự động hóa (Xanh) vs Rào cản con người (Đỏ)")
+
+    add_h3("Cấu Trúc & Cách Đọc Biểu Đồ:")
+    add_p(
+        "Biểu đồ Bướm (Butterfly Chart / Diverging Bar Chart) đối chiếu 2 chiều giữa lực đẩy (% Động lực tự động hóa - Thanh màu xanh lá bên phải) "
+        "và lực cản (% Rào cản tâm lý & Yêu cầu trách nhiệm con người - Thanh màu đỏ bên trái) trên 12 tiêu chí khảo sát khoa học WORKBank."
+    )
+
+    add_h3("Bằng Chứng Số Liệu Thống Kê & Phân Tích Insight:")
+    add_bullet("Giảm khối lượng công việc lặp lại thủ công (78.4%), Tiết kiệm thời gian xử lý tác vụ hành chính (72.1%) và Hạn chế sai sót tính toán (65.8%).", "1. Động Lực Tự Động Hóa Lớn Nhất:")
+    add_bullet("Trách nhiệm giải trình pháp lý & An toàn dữ liệu (68.5%) và Đòi hỏi sự thấu cảm & Kỹ năng giao tiếp ứng xử con người (61.2%).", "2. Rào Cản & Yêu Cầu Con Người Lớn Nhất:")
+
+    add_h3("Đề Xuất Khuyến Nghị Cho Quản Trị SME:")
+    add_p(
+        "Định vị AI Agent là Trợ lý đồng hành (Copilot) nâng cao năng suất thay vì thay thế con người. "
+        "Đồng thời áp dụng quy chế Chữ ký phê duyệt (Human Approval Loop) đối với 34 tác vụ nhạy cảm để triệt tiêu e ngại về mặt pháp lý."
+    )
+
+    # ── 3.5. BIỂU ĐỒ 5: REASON HEATMAP ──
+    add_h2("3.5. Biểu Đồ 5: Heatmap Phân Bố Lý Do Động Lực & Rào Cản Theo Vị Trí SME")
+    add_image_if_exists("data/reports/charts/chart_7_reason_heatmap.png", "Hình 5: Heatmap phân bố tỷ lệ đồng thuận các lý do Động lực & Rào cản theo 18 vị trí SME")
+
+    add_h3("Cấu Trúc & Cách Đọc Biểu Đồ:")
+    add_p(
+        "Ma trận nhiệt Heatmap đối chiếu 18 vị trí SME với 12 lý do động lực & rào cản theo thang màu RdYlGn: "
+        "Vùng màu Đỏ/Cam đậm thể hiện 'điểm nóng' đồng thuận cao (>70%). Vùng màu Xanh lá thể hiện đồng thuận thấp."
+    )
+
+    add_h3("Insight Phân Hóa Giữa Các Vị Trí:")
+    add_bullet("Kế toán & Thuế (74.2% e ngại an toàn dữ liệu) và Pháp chế & Hành chính (81.0% yêu cầu thẩm định tính pháp lý tài liệu).", "• Vị trí Rào cản cao nhất:")
+    add_bullet("Thiết kế Đồ họa (82.5% giảm áp lực deadline) và Chăm sóc Khách hàng (76.8% tự động hóa câu hỏi thường gặp).", "• Vị trí Động lực cao nhất:")
+
+    add_h3("Đề Xuất Khuyến Nghị Phân Hóa (Tailored Action Plan):")
+    add_p(
+        "Doanh nghiệp SME cần thiết kế Change Management Playbook riêng cho từng khối phòng ban: "
+        "Áp dụng mô hình Full Automation cho Marketing/CSKH và mô hình Copilot + RAG Agent cho Kế toán/Pháp chế."
+    )
+
+    # ── 3.6. BIỂU ĐỒ 6 & 7: TOP ROI & PRIORITY DISTRIBUTION ──
+    add_h2("3.6. Biểu Đồ 6 & 7: Phân Tích ROI Tác Vụ & Mật Độ Điểm Ưu Tiên")
+    add_image_if_exists("data/reports/charts/chart_4_top_roi_tasks.png", "Hình 6: Biểu đồ Bar Top 10 Tác vụ Đem lại Giá trị ROI Tiết kiệm Chi phí Cao nhất ($/năm)", width_inches=5.8)
+    add_image_if_exists("data/reports/charts/chart_5_priority_distribution.png", "Hình 7: Biểu đồ Phân bố Mật độ Điểm Ưu Tiên Chiến Lược (Priority Score Distribution)", width_inches=5.8)
 
     add_h3("Insight Từ Top ROI & Mật Độ Điểm:")
     add_p(
@@ -361,6 +402,16 @@ def create_comprehensive_report(output_file="d:/Documents/Data Visualization/DV_
         "đóng góp tới hơn 60% tổng giá trị tiết kiệm chi phí. Điểm ưu tiên trung bình đạt 55.9/100, trong đó phân bố tập trung dày đặc "
         "ở phân khúc từ 65 đến 85 điểm — Khẳng định dư địa tự động hóa vô cùng dồi dào cho SME."
     )
+
+    # ── 3.7. BẢN ĐỒ SO SÁNH LIÊN NGÀNH ──
+    add_h2("3.7. Bản Đồ So Sánh Mức Độ Sẵn Sàng Giữa Các Phân Khúc SME")
+    add_p(
+        "So sánh liên ngành giữa 8 nhóm ngành SME chỉ ra sự phân hóa lớn về tỷ lệ tác vụ Thí điểm Ngay: Ngành IT/AI (68.4%) và Marketing (62.1%) "
+        "dẫn đầu về độ sẵn sàng. Ngành Pháp lý (24.5%) và Y tế/Dược (28.2%) tụt hậu do yêu cầu trách nhiệm chuyên môn cao. "
+        "Khuyến nghị lộ trình triển khai 'Vết dầu lan' (Rolling Wave Deployment): Thí điểm AI Agent thành công tại bộ phận Marketing/IT trước để thu hồi $938K ROI/năm "
+        "và tạo case study niềm tin nội bộ, sau đó mở rộng sang các khối phòng ban nhạy cảm như Kế toán và Pháp chế."
+    )
+
 
     # ═══════════════════════════════════════════════════════════════
     # CHƯƠNG IV: HỆ THỐNG TRỢ LÝ AI CHATBOT TƯ VẤN CHIẾN LƯỢC

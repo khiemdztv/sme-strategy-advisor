@@ -43,7 +43,7 @@ with c2: render_mockup_kpi("Thí điểm ngay", f"{n_pilot}", "Quick Wins", "#22
 with c3: render_mockup_kpi("ROI Thí điểm", f"${pilot_roi:,.0f}", "/năm", "#22C55E")
 with c4: render_mockup_kpi("Tác vụ rủi ro", f"{n_risk}", "cần Copilot", "#EF4444")
 with c5: render_mockup_kpi("Priority Score", f"{avg_p:.1f}", "/ 100", "#8B5CF6")
-with c6: render_mockup_kpi("Độ an toàn", "94%", "Human-in-loop", "#0284C7")
+with c6: render_mockup_kpi("Độ an toàn", f"{(n - n_risk) / n * 100 if n > 0 else 0:.0f}%", "Human-in-loop", "#0284C7")
 
 st.markdown("<br>", unsafe_allow_html=True)
 
@@ -99,6 +99,41 @@ with col_quickwins:
 </div>
 </div>"""
     st.markdown(quickwin_html, unsafe_allow_html=True)
+
+    st.markdown(
+        """<div style="margin-top: 1rem; background:#F0FDF4; border:1px solid #BBF7D0; border-radius:12px; padding:1.1rem;">
+<div style="font-weight:800; font-size:0.95rem; color:#166534; margin-bottom:0.3rem;"><i class="fa-solid fa-file-word"></i> Xuất Báo Cáo Nhóm Cuối Kỳ (.docx)</div>
+<div style="font-size:0.8rem; color:#15803D; margin-bottom:0.8rem;">Tải bản Báo cáo Học thuật 5 Chương hoàn chỉnh (dạng Word .docx) đã tổng hợp tự động từ dữ liệu.</div>
+</div>""",
+        unsafe_allow_html=True
+    )
+
+    report_path = "data/reports/BaoCao_SME_Strategy_Advisor.docx"
+    os.makedirs("data/reports", exist_ok=True)
+
+    try:
+        try:
+            from generate_comprehensive_word_report import create_comprehensive_report
+        except ImportError:
+            from src.generate_comprehensive_word_report import create_comprehensive_report
+
+        if not os.path.exists(report_path):
+            create_comprehensive_report(report_path)
+    except Exception as e:
+        st.warning(f"Chưa tạo sẵn file Word: {e}")
+
+    if os.path.exists(report_path):
+        with open(report_path, "rb") as f_doc:
+            st.download_button(
+                label="📥 Tải Báo Cáo Word Hoàn Chỉnh (.docx)",
+                data=f_doc.read(),
+                file_name="BaoCao_HoanChinh_CuoiKy_SME_Strategy_Advisor.docx",
+                mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                type="primary",
+                use_container_width=True
+            )
+
+
 
 stats_summary = (
     f"- Vị trí / Ngành đang chọn: {job_label}\n"

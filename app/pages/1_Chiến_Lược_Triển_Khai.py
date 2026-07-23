@@ -66,7 +66,7 @@ with col_chart:
         size="roi_savings_usd", color="risk_flag",
         color_discrete_map=color_map,
         hover_data={"occupation": True, "task_statement": True, "priority_score": ":.1f"},
-        labels={"norm_capability": "Năng lực AI (C)", "norm_desire": "Mong muốn (D)"},
+        labels={"norm_capability": "Năng lực AI (C)", "norm_desire": "Mong muốn (D)", "roi_savings_usd": "ROI ước tính ($)", "risk_flag": "Nhóm chiến lược", "occupation": "Nghề nghiệp", "task_statement": "Tác vụ", "priority_score": "Điểm ưu tiên"},
         template="plotly_white", size_max=32
     )
 

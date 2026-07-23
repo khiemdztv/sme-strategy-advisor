@@ -74,11 +74,17 @@ def inject_custom_css():
             display: none !important;
         }
 
-        /* ── 1. HEADER (Shifted Down 65px for Maximum Comfort) ── */
+        [data-testid="stSidebarUserContent"],
+        [data-testid="stSidebarContent"] {
+            padding-top: 0rem !important;
+            margin-top: 0rem !important;
+        }
+
+        /* ── 1. HEADER (Positioned Flush at Top) ── */
         .bi-sidebar-header {
             flex: 0 0 auto;
-            min-height: 125px !important;
-            padding: 65px 20px 18px 20px !important;
+            min-height: 75px !important;
+            padding: 20px 20px 18px 20px !important;
             display: flex !important;
             align-items: center !important;
             gap: 12px !important;

@@ -75,7 +75,7 @@ with col_chart:
                 size="size_time", color="pct_pilot",
                 color_continuous_scale="RdYlGn",
                 hover_name=role_col,
-                labels={"avg_enjoyment": "Mức yêu thích (Enjoyment)", "avg_security": "Lo ngại mất việc (Security)"},
+                labels={"avg_enjoyment": "Mức yêu thích (Enjoyment)", "avg_security": "Lo ngại mất việc (Security)", "size_time": "Thời gian TB", "pct_pilot": "% Thí điểm ngay"},
                 template="plotly_white", size_max=40
             )
 
@@ -95,6 +95,72 @@ with col_chart:
 with col_insight:
     proof1, cause1, report1 = worker_psychology_insight(df_profile, category_name=job_label)
     render_report_insight(proof1, cause1, report1)
+
+# ── Row 2: Butterfly Chart (Đối chiếu Động lực vs Rào cản) ──
+st.markdown("<br>", unsafe_allow_html=True)
+col_bf_chart, col_bf_insight = st.columns([3.5, 2.5])
+
+auto_present = [c for c in AUTO_REASONS if c in df_profile.columns]
+human_present = [c for c in HUMAN_REASONS if c in df_profile.columns]
+
+with col_bf_chart:
+    st.markdown("""<div class="mockup-card">
+<div class="mockup-card-title">Biểu Đồ Bướm — Đối Chiếu Động Lực vs Rào Cản Tâm Lý</div>
+<div class="mockup-card-subtitle">Xanh = % Muốn tự động hóa (Động lực) | Đỏ = % Yêu cầu con người (Rào cản)</div>""", unsafe_allow_html=True)
+
+    if auto_present and human_present and not df_profile.empty:
+        auto_means = df_profile[auto_present].mean()
+        human_means = df_profile[human_present].mean()
+
+        y_auto_labels = [REASON_LABELS_VI.get(c, c) for c in auto_means.index]
+        y_human_labels = [REASON_LABELS_VI.get(c, c) for c in human_means.index]
+
+        fig_bf = go.Figure()
+
+        # Left side: Human reasons (negative values for diverging bar chart)
+        fig_bf.add_trace(go.Bar(
+            y=y_human_labels,
+            x=[-v for v in human_means.values],
+            orientation='h',
+            name='Yêu cầu Con người (Rào cản)',
+            marker_color='#EF4444',
+            text=[f"{v:.1f}%" for v in human_means.values],
+            textposition='outside',
+            hoverinfo='y+text'
+        ))
+
+        # Right side: Auto reasons (positive values)
+        fig_bf.add_trace(go.Bar(
+            y=y_auto_labels,
+            x=list(auto_means.values),
+            orientation='h',
+            name='Động lực Tự động hóa',
+            marker_color='#22C55E',
+            text=[f"{v:.1f}%" for v in auto_means.values],
+            textposition='outside',
+            hoverinfo='y+text'
+        ))
+
+        fig_bf.update_layout(
+            barmode='overlay',
+            height=380,
+            template='plotly_white',
+            margin=dict(l=10, r=40, t=10, b=20),
+            xaxis=dict(title="% Đồng Ý Khảo Sát", zeroline=True, zerolinecolor="#94A3B8"),
+            showlegend=True,
+            legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
+        )
+        st.plotly_chart(fig_bf, use_container_width=True)
+    st.markdown("</div>", unsafe_allow_html=True)
+
+with col_bf_insight:
+    proof_b, cause_b, report_b = butterfly_insight(df_profile, auto_present, human_present, category_name=job_label)
+    for eng, vi in REASON_LABELS_VI.items():
+        proof_b = proof_b.replace(eng, vi)
+        cause_b = cause_b.replace(eng, vi)
+        report_b = report_b.replace(eng, vi)
+    render_report_insight(proof_b, cause_b, report_b)
+
 
 stats_summary = (
     f"- Vị trí / Ngành đang chọn: {job_label}\n"

@@ -112,7 +112,7 @@ with col2:
             "🟠 Rủi ro Kỳ vọng vượt Năng lực": "#EF4444",
             "⚪ Ưu tiên Thấp": "#A78BFA"
         },
-        labels={"norm_capability": "Năng lực AI (C)", "norm_desire": "Mong muốn (D)"},
+        labels={"norm_capability": "Năng lực AI (C)", "norm_desire": "Mong muốn (D)", "roi_savings_usd": "ROI ước tính ($)", "risk_flag": "Nhóm chiến lược"},
         template="plotly_white", size_max=28
     )
 
